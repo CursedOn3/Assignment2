@@ -186,6 +186,83 @@ namespace WeAreCarsRentalSystemWinForms
             return dataTable;
         }
 
+        public static void DeleteBooking(int bookingId)
+        {
+            string deleteQuery = @"DELETE FROM bookings WHERE id = @bookingId;";
+
+            try
+            {
+                using (var connection = new SqliteConnection(ConnectionString))
+                {
+                    connection.Open();
+                    using (var command = new SqliteCommand(deleteQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@bookingId", bookingId);
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected == 0)
+                        {
+                            throw new Exception("Booking not found or already deleted.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to delete booking: {ex.Message}");
+            }
+        }
+
+        public static void UpdateBooking(int bookingId, string firstName, string surname, string address, 
+                                        int age, int rentalDays, string carType, string fuelType, 
+                                        string extras, decimal totalCost)
+        {
+            string updateQuery = @"
+                UPDATE bookings 
+                SET first_name = @firstName,
+                    surname = @surname,
+                    address = @address,
+                    age = @age,
+                    rental_days = @rentalDays,
+                    car_type = @carType,
+                    fuel_type = @fuelType,
+                    extras = @extras,
+                    total_cost = @totalCost
+                WHERE id = @bookingId;";
+
+            try
+            {
+                using (var connection = new SqliteConnection(ConnectionString))
+                {
+                    connection.Open();
+                    using (var command = new SqliteCommand(updateQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@bookingId", bookingId);
+                        command.Parameters.AddWithValue("@firstName", firstName);
+                        command.Parameters.AddWithValue("@surname", surname);
+                        command.Parameters.AddWithValue("@address", address);
+                        command.Parameters.AddWithValue("@age", age);
+                        command.Parameters.AddWithValue("@rentalDays", rentalDays);
+                        command.Parameters.AddWithValue("@carType", carType);
+                        command.Parameters.AddWithValue("@fuelType", fuelType);
+                        command.Parameters.AddWithValue("@extras", extras ?? "None");
+                        command.Parameters.AddWithValue("@totalCost", (double)totalCost);
+
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected == 0)
+                        {
+                            throw new Exception("Booking not found or could not be updated.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to update booking: {ex.Message}");
+            }
+        }
+
         public static string GetDatabasePath()
         {
             return DatabasePath;

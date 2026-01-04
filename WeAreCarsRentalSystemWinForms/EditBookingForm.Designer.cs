@@ -1,6 +1,6 @@
 namespace WeAreCarsRentalSystemWinForms
 {
-    partial class BookingForm
+    partial class EditBookingForm
     {
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.Label lblTitle;
@@ -13,9 +13,6 @@ namespace WeAreCarsRentalSystemWinForms
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label lblAge;
         private System.Windows.Forms.NumericUpDown numAge;
-        private System.Windows.Forms.Label lblLicence;
-        private System.Windows.Forms.RadioButton rbLicenceYes;
-        private System.Windows.Forms.RadioButton rbLicenceNo;
         private System.Windows.Forms.GroupBox grpRentalDetails;
         private System.Windows.Forms.Label lblRentalDays;
         private System.Windows.Forms.NumericUpDown numRentalDays;
@@ -28,8 +25,8 @@ namespace WeAreCarsRentalSystemWinForms
         private System.Windows.Forms.CheckBox chkBreakdownCover;
         private System.Windows.Forms.Label lblTotalCost;
         private System.Windows.Forms.Label lblTotalCostValue;
-        private System.Windows.Forms.Button btnConfirmBooking;
-        private System.Windows.Forms.Panel panelLicence;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnCancel;
 
         protected override void Dispose(bool disposing)
         {
@@ -52,10 +49,6 @@ namespace WeAreCarsRentalSystemWinForms
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.lblAge = new System.Windows.Forms.Label();
             this.numAge = new System.Windows.Forms.NumericUpDown();
-            this.lblLicence = new System.Windows.Forms.Label();
-            this.panelLicence = new System.Windows.Forms.Panel();
-            this.rbLicenceYes = new System.Windows.Forms.RadioButton();
-            this.rbLicenceNo = new System.Windows.Forms.RadioButton();
             this.grpRentalDetails = new System.Windows.Forms.GroupBox();
             this.lblRentalDays = new System.Windows.Forms.Label();
             this.numRentalDays = new System.Windows.Forms.NumericUpDown();
@@ -68,10 +61,10 @@ namespace WeAreCarsRentalSystemWinForms
             this.chkBreakdownCover = new System.Windows.Forms.CheckBox();
             this.lblTotalCost = new System.Windows.Forms.Label();
             this.lblTotalCostValue = new System.Windows.Forms.Label();
-            this.btnConfirmBooking = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.grpCustomerDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAge)).BeginInit();
-            this.panelLicence.SuspendLayout();
             this.grpRentalDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRentalDays)).BeginInit();
             this.grpOptionalExtras.SuspendLayout();
@@ -86,7 +79,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(760, 40);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "New Booking";
+            this.lblTitle.Text = "Edit Booking";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // grpCustomerDetails
@@ -99,12 +92,10 @@ namespace WeAreCarsRentalSystemWinForms
             this.grpCustomerDetails.Controls.Add(this.txtAddress);
             this.grpCustomerDetails.Controls.Add(this.lblAge);
             this.grpCustomerDetails.Controls.Add(this.numAge);
-            this.grpCustomerDetails.Controls.Add(this.lblLicence);
-            this.grpCustomerDetails.Controls.Add(this.panelLicence);
             this.grpCustomerDetails.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.grpCustomerDetails.Location = new System.Drawing.Point(20, 70);
             this.grpCustomerDetails.Name = "grpCustomerDetails";
-            this.grpCustomerDetails.Size = new System.Drawing.Size(370, 320);
+            this.grpCustomerDetails.Size = new System.Drawing.Size(370, 280);
             this.grpCustomerDetails.TabIndex = 1;
             this.grpCustomerDetails.TabStop = false;
             this.grpCustomerDetails.Text = "Customer Details";
@@ -178,54 +169,11 @@ namespace WeAreCarsRentalSystemWinForms
             this.numAge.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.numAge.Location = new System.Drawing.Point(15, 233);
             this.numAge.Maximum = new decimal(new int[] { 120, 0, 0, 0 });
-            this.numAge.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            this.numAge.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             this.numAge.Name = "numAge";
             this.numAge.Size = new System.Drawing.Size(120, 27);
             this.numAge.TabIndex = 7;
             this.numAge.Value = new decimal(new int[] { 18, 0, 0, 0 });
-            // 
-            // lblLicence
-            // 
-            this.lblLicence.AutoSize = true;
-            this.lblLicence.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblLicence.Location = new System.Drawing.Point(15, 270);
-            this.lblLicence.Name = "lblLicence";
-            this.lblLicence.Size = new System.Drawing.Size(149, 20);
-            this.lblLicence.TabIndex = 8;
-            this.lblLicence.Text = "Valid Driving Licence:";
-            // 
-            // panelLicence
-            // 
-            this.panelLicence.Controls.Add(this.rbLicenceYes);
-            this.panelLicence.Controls.Add(this.rbLicenceNo);
-            this.panelLicence.Location = new System.Drawing.Point(170, 265);
-            this.panelLicence.Name = "panelLicence";
-            this.panelLicence.Size = new System.Drawing.Size(185, 35);
-            this.panelLicence.TabIndex = 9;
-            // 
-            // rbLicenceYes
-            // 
-            this.rbLicenceYes.AutoSize = true;
-            this.rbLicenceYes.Checked = true;
-            this.rbLicenceYes.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.rbLicenceYes.Location = new System.Drawing.Point(3, 5);
-            this.rbLicenceYes.Name = "rbLicenceYes";
-            this.rbLicenceYes.Size = new System.Drawing.Size(51, 24);
-            this.rbLicenceYes.TabIndex = 0;
-            this.rbLicenceYes.TabStop = true;
-            this.rbLicenceYes.Text = "Yes";
-            this.rbLicenceYes.UseVisualStyleBackColor = true;
-            // 
-            // rbLicenceNo
-            // 
-            this.rbLicenceNo.AutoSize = true;
-            this.rbLicenceNo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.rbLicenceNo.Location = new System.Drawing.Point(80, 5);
-            this.rbLicenceNo.Name = "rbLicenceNo";
-            this.rbLicenceNo.Size = new System.Drawing.Size(48, 24);
-            this.rbLicenceNo.TabIndex = 1;
-            this.rbLicenceNo.Text = "No";
-            this.rbLicenceNo.UseVisualStyleBackColor = true;
             // 
             // grpRentalDetails
             // 
@@ -238,7 +186,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.grpRentalDetails.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.grpRentalDetails.Location = new System.Drawing.Point(410, 70);
             this.grpRentalDetails.Name = "grpRentalDetails";
-            this.grpRentalDetails.Size = new System.Drawing.Size(370, 230);
+            this.grpRentalDetails.Size = new System.Drawing.Size(370, 190);
             this.grpRentalDetails.TabIndex = 2;
             this.grpRentalDetails.TabStop = false;
             this.grpRentalDetails.Text = "Rental Details";
@@ -269,7 +217,7 @@ namespace WeAreCarsRentalSystemWinForms
             // 
             this.lblCarType.AutoSize = true;
             this.lblCarType.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblCarType.Location = new System.Drawing.Point(15, 95);
+            this.lblCarType.Location = new System.Drawing.Point(15, 90);
             this.lblCarType.Name = "lblCarType";
             this.lblCarType.Size = new System.Drawing.Size(69, 20);
             this.lblCarType.TabIndex = 2;
@@ -280,7 +228,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.cmbCarType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCarType.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbCarType.FormattingEnabled = true;
-            this.cmbCarType.Location = new System.Drawing.Point(15, 118);
+            this.cmbCarType.Location = new System.Drawing.Point(15, 113);
             this.cmbCarType.Name = "cmbCarType";
             this.cmbCarType.Size = new System.Drawing.Size(340, 28);
             this.cmbCarType.TabIndex = 3;
@@ -290,7 +238,7 @@ namespace WeAreCarsRentalSystemWinForms
             // 
             this.lblFuelType.AutoSize = true;
             this.lblFuelType.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblFuelType.Location = new System.Drawing.Point(15, 160);
+            this.lblFuelType.Location = new System.Drawing.Point(220, 30);
             this.lblFuelType.Name = "lblFuelType";
             this.lblFuelType.Size = new System.Drawing.Size(74, 20);
             this.lblFuelType.TabIndex = 4;
@@ -301,9 +249,9 @@ namespace WeAreCarsRentalSystemWinForms
             this.cmbFuelType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFuelType.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cmbFuelType.FormattingEnabled = true;
-            this.cmbFuelType.Location = new System.Drawing.Point(15, 183);
+            this.cmbFuelType.Location = new System.Drawing.Point(220, 53);
             this.cmbFuelType.Name = "cmbFuelType";
-            this.cmbFuelType.Size = new System.Drawing.Size(340, 28);
+            this.cmbFuelType.Size = new System.Drawing.Size(135, 28);
             this.cmbFuelType.TabIndex = 5;
             this.cmbFuelType.SelectedIndexChanged += new System.EventHandler(this.CalculateTotalCost);
             // 
@@ -312,7 +260,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.grpOptionalExtras.Controls.Add(this.chkUnlimitedMileage);
             this.grpOptionalExtras.Controls.Add(this.chkBreakdownCover);
             this.grpOptionalExtras.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.grpOptionalExtras.Location = new System.Drawing.Point(410, 320);
+            this.grpOptionalExtras.Location = new System.Drawing.Point(410, 280);
             this.grpOptionalExtras.Name = "grpOptionalExtras";
             this.grpOptionalExtras.Size = new System.Drawing.Size(370, 70);
             this.grpOptionalExtras.TabIndex = 3;
@@ -327,7 +275,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.chkUnlimitedMileage.Name = "chkUnlimitedMileage";
             this.chkUnlimitedMileage.Size = new System.Drawing.Size(224, 24);
             this.chkUnlimitedMileage.TabIndex = 0;
-            this.chkUnlimitedMileage.Text = "Unlimited Mileage (+ï¿½10/day)";
+            this.chkUnlimitedMileage.Text = "Unlimited Mileage (+£10/day)";
             this.chkUnlimitedMileage.UseVisualStyleBackColor = true;
             this.chkUnlimitedMileage.CheckedChanged += new System.EventHandler(this.CalculateTotalCost);
             // 
@@ -337,9 +285,9 @@ namespace WeAreCarsRentalSystemWinForms
             this.chkBreakdownCover.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkBreakdownCover.Location = new System.Drawing.Point(245, 30);
             this.chkBreakdownCover.Name = "chkBreakdownCover";
-            this.chkBreakdownCover.Size = new System.Drawing.Size(115, 24);
+            this.chkBreakdownCover.Size = new System.Drawing.Size(110, 24);
             this.chkBreakdownCover.TabIndex = 1;
-            this.chkBreakdownCover.Text = "Cover (+ï¿½2/d)";
+            this.chkBreakdownCover.Text = "Cover (+£2/d)";
             this.chkBreakdownCover.UseVisualStyleBackColor = true;
             this.chkBreakdownCover.CheckedChanged += new System.EventHandler(this.CalculateTotalCost);
             // 
@@ -347,7 +295,7 @@ namespace WeAreCarsRentalSystemWinForms
             // 
             this.lblTotalCost.AutoSize = true;
             this.lblTotalCost.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.lblTotalCost.Location = new System.Drawing.Point(250, 410);
+            this.lblTotalCost.Location = new System.Drawing.Point(250, 370);
             this.lblTotalCost.Name = "lblTotalCost";
             this.lblTotalCost.Size = new System.Drawing.Size(133, 32);
             this.lblTotalCost.TabIndex = 4;
@@ -358,50 +306,64 @@ namespace WeAreCarsRentalSystemWinForms
             this.lblTotalCostValue.AutoSize = false;
             this.lblTotalCostValue.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
             this.lblTotalCostValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.lblTotalCostValue.Location = new System.Drawing.Point(380, 405);
+            this.lblTotalCostValue.Location = new System.Drawing.Point(380, 365);
             this.lblTotalCostValue.Name = "lblTotalCostValue";
             this.lblTotalCostValue.Size = new System.Drawing.Size(180, 40);
             this.lblTotalCostValue.TabIndex = 5;
-            this.lblTotalCostValue.Text = "ï¿½25.00";
+            this.lblTotalCostValue.Text = "£25.00";
             this.lblTotalCostValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btnConfirmBooking
+            // btnSave
             // 
-            this.btnConfirmBooking.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.btnConfirmBooking.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfirmBooking.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnConfirmBooking.ForeColor = System.Drawing.Color.White;
-            this.btnConfirmBooking.Location = new System.Drawing.Point(300, 460);
-            this.btnConfirmBooking.Name = "btnConfirmBooking";
-            this.btnConfirmBooking.Size = new System.Drawing.Size(200, 50);
-            this.btnConfirmBooking.TabIndex = 6;
-            this.btnConfirmBooking.Text = "Confirm Booking";
-            this.btnConfirmBooking.UseVisualStyleBackColor = false;
-            this.btnConfirmBooking.Click += new System.EventHandler(this.btnConfirmBooking_Click);
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnSave.ForeColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(250, 420);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(150, 50);
+            this.btnSave.TabIndex = 6;
+            this.btnSave.Text = "?? Save";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // BookingForm
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.Gray;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(420, 420);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(150, 50);
+            this.btnCancel.TabIndex = 7;
+            this.btnCancel.Text = "? Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // EditBookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 530);
+            this.ClientSize = new System.Drawing.Size(800, 490);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.grpCustomerDetails);
             this.Controls.Add(this.grpRentalDetails);
             this.Controls.Add(this.grpOptionalExtras);
             this.Controls.Add(this.lblTotalCost);
             this.Controls.Add(this.lblTotalCostValue);
-            this.Controls.Add(this.btnConfirmBooking);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnCancel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.Name = "BookingForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WeAreCars Rental System - New Booking";
+            this.MinimizeBox = false;
+            this.Name = "EditBookingForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Edit Booking - WeAreCars Rental System";
             this.grpCustomerDetails.ResumeLayout(false);
             this.grpCustomerDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAge)).EndInit();
-            this.panelLicence.ResumeLayout(false);
-            this.panelLicence.PerformLayout();
             this.grpRentalDetails.ResumeLayout(false);
             this.grpRentalDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRentalDays)).EndInit();

@@ -6,6 +6,8 @@ namespace WeAreCarsRentalSystemWinForms
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.DataGridView dgvBookings;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblTotalBookings;
         private System.Windows.Forms.Label lblTotalRevenue;
@@ -24,6 +26,8 @@ namespace WeAreCarsRentalSystemWinForms
             this.lblTitle = new System.Windows.Forms.Label();
             this.dgvBookings = new System.Windows.Forms.DataGridView();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblTotalBookings = new System.Windows.Forms.Label();
             this.lblTotalRevenue = new System.Windows.Forms.Label();
@@ -73,7 +77,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.lblTotalRevenue.AutoSize = true;
             this.lblTotalRevenue.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.lblTotalRevenue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(153)))), ((int)(((byte)(0)))));
-            this.lblTotalRevenue.Location = new System.Drawing.Point(250, 540);
+            this.lblTotalRevenue.Location = new System.Drawing.Point(20, 560);
             this.lblTotalRevenue.Name = "lblTotalRevenue";
             this.lblTotalRevenue.Size = new System.Drawing.Size(162, 25);
             this.lblTotalRevenue.TabIndex = 3;
@@ -85,13 +89,41 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRefresh.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
             this.btnRefresh.ForeColor = System.Drawing.Color.White;
-            this.btnRefresh.Location = new System.Drawing.Point(650, 530);
+            this.btnRefresh.Location = new System.Drawing.Point(470, 530);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(150, 45);
             this.btnRefresh.TabIndex = 4;
-            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.Text = "🔄 Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.btnEdit.ForeColor = System.Drawing.Color.White;
+            this.btnEdit.Location = new System.Drawing.Point(310, 530);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(150, 45);
+            this.btnEdit.TabIndex = 5;
+            this.btnEdit.Text = "✏️ Edit";
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.btnDelete.ForeColor = System.Drawing.Color.White;
+            this.btnDelete.Location = new System.Drawing.Point(650, 530);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(150, 45);
+            this.btnDelete.TabIndex = 6;
+            this.btnDelete.Text = "🗑️ Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnClose
             // 
@@ -102,8 +134,8 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnClose.Location = new System.Drawing.Point(830, 530);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(150, 45);
-            this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "Close";
+            this.btnClose.TabIndex = 7;
+            this.btnClose.Text = "✖ Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -118,6 +150,8 @@ namespace WeAreCarsRentalSystemWinForms
             this.Controls.Add(this.lblTotalBookings);
             this.Controls.Add(this.lblTotalRevenue);
             this.Controls.Add(this.btnRefresh);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;

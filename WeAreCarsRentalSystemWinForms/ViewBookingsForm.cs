@@ -91,6 +91,83 @@ namespace WeAreCarsRentalSystemWinForms
                           MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvBookings.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a booking to delete.", "No Selection", 
+                              MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Get the selected row
+            DataGridViewRow selectedRow = dgvBookings.SelectedRows[0];
+            int bookingId = Convert.ToInt32(selectedRow.Cells["id"].Value);
+            string customerName = $"{selectedRow.Cells["first_name"].Value} {selectedRow.Cells["surname"].Value}";
+            decimal totalCost = Convert.ToDecimal(selectedRow.Cells["total_cost"].Value);
+
+            // Confirm deletion
+            DialogResult result = MessageBox.Show(
+                $"Are you sure you want to delete this booking?\n\n" +
+                $"Booking ID: {bookingId}\n" +
+                $"Customer: {customerName}\n" +
+                $"Total Cost: £{totalCost:F2}\n\n" +
+                $"This action cannot be undone!",
+                "Confirm Delete",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    DatabaseHelper.DeleteBooking(bookingId);
+                    MessageBox.Show("Booking deleted successfully!", "Success", 
+                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadBookings(); // Refresh the grid
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting booking:\n\n{ex.Message}", "Error", 
+                                  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (dgvBookings.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a booking to edit.", "No Selection", 
+                              MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Get the selected row
+            DataGridViewRow selectedRow = dgvBookings.SelectedRows[0];
+            
+            int bookingId = Convert.ToInt32(selectedRow.Cells["id"].Value);
+            string firstName = selectedRow.Cells["first_name"].Value.ToString() ?? "";
+            string surname = selectedRow.Cells["surname"].Value.ToString() ?? "";
+            string address = selectedRow.Cells["address"].Value.ToString() ?? "";
+            int age = Convert.ToInt32(selectedRow.Cells["age"].Value);
+            int rentalDays = Convert.ToInt32(selectedRow.Cells["rental_days"].Value);
+            string carType = selectedRow.Cells["car_type"].Value.ToString() ?? "";
+            string fuelType = selectedRow.Cells["fuel_type"].Value.ToString() ?? "";
+            string extras = selectedRow.Cells["extras"].Value.ToString() ?? "";
+
+            // Open edit form
+            EditBookingForm editForm = new EditBookingForm(bookingId, firstName, surname, address, 
+                                                          age, rentalDays, carType, fuelType, extras);
+            editForm.ShowDialog();
+
+            // Refresh grid if booking was updated
+            if (editForm.BookingUpdated)
+            {
+                LoadBookings();
+            }
+        }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
