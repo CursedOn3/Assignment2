@@ -81,7 +81,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.lblTotalRevenue.Name = "lblTotalRevenue";
             this.lblTotalRevenue.Size = new System.Drawing.Size(162, 25);
             this.lblTotalRevenue.TabIndex = 3;
-            this.lblTotalRevenue.Text = "Total Revenue: �0";
+            this.lblTotalRevenue.Text = "Total Revenue: 0";
             // 
             // btnRefresh
             // 
@@ -93,7 +93,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(150, 45);
             this.btnRefresh.TabIndex = 4;
-            this.btnRefresh.Text = "🔄 Refresh";
+            this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
@@ -107,7 +107,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(150, 45);
             this.btnEdit.TabIndex = 5;
-            this.btnEdit.Text = "✏️ Edit";
+            this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -121,7 +121,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(150, 45);
             this.btnDelete.TabIndex = 6;
-            this.btnDelete.Text = "🗑️ Delete";
+            this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -135,7 +135,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(150, 45);
             this.btnClose.TabIndex = 7;
-            this.btnClose.Text = "✖ Close";
+            this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 

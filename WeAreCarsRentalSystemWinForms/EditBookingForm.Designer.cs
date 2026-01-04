@@ -275,7 +275,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.chkUnlimitedMileage.Name = "chkUnlimitedMileage";
             this.chkUnlimitedMileage.Size = new System.Drawing.Size(224, 24);
             this.chkUnlimitedMileage.TabIndex = 0;
-            this.chkUnlimitedMileage.Text = "Unlimited Mileage (+£10/day)";
+            this.chkUnlimitedMileage.Text = "Unlimited Mileage (+ï¿½10/day)";
             this.chkUnlimitedMileage.UseVisualStyleBackColor = true;
             this.chkUnlimitedMileage.CheckedChanged += new System.EventHandler(this.CalculateTotalCost);
             // 
@@ -287,7 +287,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.chkBreakdownCover.Name = "chkBreakdownCover";
             this.chkBreakdownCover.Size = new System.Drawing.Size(110, 24);
             this.chkBreakdownCover.TabIndex = 1;
-            this.chkBreakdownCover.Text = "Cover (+£2/d)";
+            this.chkBreakdownCover.Text = "Cover (+ï¿½2/d)";
             this.chkBreakdownCover.UseVisualStyleBackColor = true;
             this.chkBreakdownCover.CheckedChanged += new System.EventHandler(this.CalculateTotalCost);
             // 
@@ -310,7 +310,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.lblTotalCostValue.Name = "lblTotalCostValue";
             this.lblTotalCostValue.Size = new System.Drawing.Size(180, 40);
             this.lblTotalCostValue.TabIndex = 5;
-            this.lblTotalCostValue.Text = "£25.00";
+            this.lblTotalCostValue.Text = "25.00";
             this.lblTotalCostValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnSave
@@ -323,7 +323,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(150, 50);
             this.btnSave.TabIndex = 6;
-            this.btnSave.Text = "?? Save";
+            this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -337,7 +337,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(150, 50);
             this.btnCancel.TabIndex = 7;
-            this.btnCancel.Text = "? Cancel";
+            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
