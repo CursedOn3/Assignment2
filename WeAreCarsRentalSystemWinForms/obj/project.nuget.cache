@@ -1,25 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "L6lfsiSRXGk=",
+  "dgSpecHash": "VTNZC3jThKg=",
   "success": true,
   "projectFilePath": "C:\\Users\\risha\\OneDrive\\Desktop\\Assignment\\WeAreCarsRentalSystemWinForms\\WeAreCarsRentalSystemWinForms.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\risha\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\risha\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\risha\\.nuget\\packages\\npgsql\\8.0.1\\npgsql.8.0.1.nupkg.sha512"
+    "C:\\Users\\risha\\.nuget\\packages\\microsoft.data.sqlite\\8.0.0\\microsoft.data.sqlite.8.0.0.nupkg.sha512",
+    "C:\\Users\\risha\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.0\\microsoft.data.sqlite.core.8.0.0.nupkg.sha512",
+    "C:\\Users\\risha\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.6\\sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
+    "C:\\Users\\risha\\.nuget\\packages\\sqlitepclraw.core\\2.1.6\\sqlitepclraw.core.2.1.6.nupkg.sha512",
+    "C:\\Users\\risha\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.6\\sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",
+    "C:\\Users\\risha\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.6\\sqlitepclraw.provider.e_sqlite3.2.1.6.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "message": "Package 'Npgsql' 8.0.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-x9vc-6hfv-hg8c",
-      "projectPath": "C:\\Users\\risha\\OneDrive\\Desktop\\Assignment\\WeAreCarsRentalSystemWinForms\\WeAreCarsRentalSystemWinForms.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\risha\\OneDrive\\Desktop\\Assignment\\WeAreCarsRentalSystemWinForms\\WeAreCarsRentalSystemWinForms.csproj",
-      "libraryId": "Npgsql",
-      "targetGraphs": [
-        "net10.0-windows7.0"
-      ]
-    }
-  ]
+  "logs": []
 }

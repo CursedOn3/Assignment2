@@ -1,6 +1,14 @@
 # WeAreCars Rental System - Windows Forms Application
 
-A Windows Forms-based car rental management system developed for CET131 Assessment 2 with Supabase PostgreSQL database integration.
+A Windows Forms-based car rental management system developed for CET131 Assessment 2 with **SQLite** database integration.
+
+## ? Key Feature: Zero Setup Required!
+
+This application uses **SQLite** - a local, file-based database that requires:
+- ? No account creation
+- ? No internet connection
+- ? No configuration
+- ? Just run and it works!
 
 ## Features
 
@@ -51,30 +59,37 @@ A Windows Forms-based car rental management system developed for CET131 Assessme
 - **Clear display:** Large, prominent total cost display
 - **Itemized breakdown** shown in confirmation dialog
 
-### 5. Database Integration (Supabase)
+### 5. Database Integration (SQLite)
+
+#### Database Features
+- **Local file-based database** - No external services required
+- **Automatic creation** - Database and tables created on first run
+- **Data persistence** - All bookings saved locally
+- **Single file** - Easy to backup and portable
+- **Location:** `bin/Debug/net10.0-windows/WeAreCarsRental.db`
 
 #### Database Table: `bookings`
 ```sql
 CREATE TABLE bookings (
-    id SERIAL PRIMARY KEY,
-    first_name VARCHAR(100) NOT NULL,
-    surname VARCHAR(100) NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT NOT NULL,
+    surname TEXT NOT NULL,
     address TEXT NOT NULL,
-    age INTEGER NOT NULL,
-    rental_days INTEGER NOT NULL,
-    car_type VARCHAR(50) NOT NULL,
-    fuel_type VARCHAR(50) NOT NULL,
+    age INTEGER NOT NULL CHECK (age >= 18),
+    rental_days INTEGER NOT NULL CHECK (rental_days >= 1 AND rental_days <= 28),
+    car_type TEXT NOT NULL,
+    fuel_type TEXT NOT NULL,
     extras TEXT,
-    total_cost DECIMAL(10, 2) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    total_cost REAL NOT NULL CHECK (total_cost >= 0),
+    created_at TEXT DEFAULT (datetime('now'))
 );
 ```
 
 #### Security Features
 - **Parameterized SQL queries** prevent SQL injection
-- **SSL/TLS connection** to Supabase (SSL Mode=Require)
 - **Input validation** before database operations
 - **Error handling** with user-friendly messages
+- **Database constraints** enforce data integrity
 
 ### 6. Booking Confirmation
 - Summary dialog showing all booking details
@@ -91,38 +106,8 @@ CREATE TABLE bookings (
 - Windows operating system
 - .NET 10.0 or later
 - Visual Studio 2022 (or later) or Visual Studio Code
-- Supabase account with PostgreSQL database
 
-### Database Setup
-
-1. **Create a Supabase Project**
-   - Sign up at [https://supabase.com](https://supabase.com)
-   - Create a new project
-   - Note your database credentials
-
-2. **Get Connection Details**
-   - Go to Project Settings ? Database
-   - Find your connection string information:
-     - Host: `db.xxxxxxxxxxxxx.supabase.co`
-     - Database: `postgres`
-     - User: `postgres`
-     - Password: Your database password
-     - Port: `5432`
-
-3. **Configure Connection String**
-   - Open `DatabaseHelper.cs`
-   - Update the `ConnectionString` constant:
-   ```csharp
-   private const string ConnectionString = 
-       "Host=db.xxxxxxxxxxxxx.supabase.co;Database=postgres;Username=postgres;Password=your_password;SSL Mode=Require;Trust Server Certificate=true";
-   ```
-   - Replace:
-     - `db.xxxxxxxxxxxxx.supabase.co` with your Supabase host
-     - `your_password` with your database password
-
-4. **Table Creation**
-   - The application automatically creates the `bookings` table on first run
-   - Alternatively, you can create it manually in Supabase SQL Editor
+**That's it! No database setup required!**
 
 ### Running the Application
 
@@ -139,16 +124,21 @@ CREATE TABLE bookings (
    dotnet run
    ```
 
+3. **First Run:**
+   - The application will automatically create `WeAreCarsRental.db`
+   - Database tables and indexes are created automatically
+   - Start using the application immediately!
+
 ## Application Flow
 
-1. **Launch** ? Welcome screen appears
+1. **Launch** ? Welcome screen appears (database auto-created)
 2. **Click "Proceed to Login"** ? Login form opens
-3. **Enter credentials** ? Click "Login"
+3. **Enter credentials** ? Click "Login" (sta001 / givemethekeys123)
 4. **Fill customer details** ? Enter all required information
 5. **Select rental options** ? Choose car type, fuel type, extras
 6. **Review total cost** ? Displayed in real-time
 7. **Click "Confirm Booking"** ? Review summary dialog
-8. **Confirm** ? Booking saved to database
+8. **Confirm** ? Booking saved to local database
 9. **Success message** ? Form resets for next booking
 
 ## Project Structure
@@ -156,7 +146,7 @@ CREATE TABLE bookings (
 ```
 WeAreCarsRentalSystemWinForms/
 ??? Program.cs                      # Application entry point
-??? DatabaseHelper.cs               # Database connection and operations
+??? DatabaseHelper.cs               # SQLite database operations
 ??? WelcomeForm.cs                  # Splash/welcome screen
 ??? WelcomeForm.Designer.cs         # Welcome form UI design
 ??? LoginForm.cs                    # Staff authentication
@@ -164,6 +154,8 @@ WeAreCarsRentalSystemWinForms/
 ??? BookingForm.cs                  # Main booking functionality
 ??? BookingForm.Designer.cs         # Booking form UI design
 ??? WeAreCarsRentalSystemWinForms.csproj  # Project file
+??? bin/Debug/net10.0-windows/
+    ??? WeAreCarsRental.db         # SQLite database (auto-created)
 ```
 
 ## Validation Rules
@@ -186,36 +178,44 @@ The application handles:
 - Empty or invalid customer details
 - Age restrictions (under 18)
 - Missing driving licence
-- Database connection failures
+- Database file access issues
 - SQL execution errors
 - Invalid data types
 
 All errors display user-friendly messages with clear guidance.
 
-## Database Connectivity
+## Viewing Your Data
 
-### Testing Connection
-The application tests database connectivity on startup and shows a warning if:
-- Connection string is not configured
-- Supabase server is unreachable
-- Credentials are incorrect
-- SSL/TLS handshake fails
+### Option 1: DB Browser for SQLite (Recommended)
+1. Download from https://sqlitebrowser.org/
+2. Install and open
+3. Open the `WeAreCarsRental.db` file
+4. Browse the `bookings` table
 
-### Connection String Format
+### Option 2: Visual Studio Code
+1. Install "SQLite Viewer" extension
+2. Right-click `WeAreCarsRental.db`
+3. Select "Open Database"
+
+### Option 3: SQL Queries (in code)
+The database supports standard SQL queries:
+```sql
+-- View all bookings
+SELECT * FROM bookings ORDER BY created_at DESC;
+
+-- Count total bookings
+SELECT COUNT(*) FROM bookings;
+
+-- Calculate total revenue
+SELECT SUM(total_cost) FROM bookings;
 ```
-Host=your-host.supabase.co;Database=postgres;Username=postgres;Password=your_password;SSL Mode=Require;Trust Server Certificate=true
-```
-
-**Important SSL Settings:**
-- `SSL Mode=Require` - Forces encrypted connection
-- `Trust Server Certificate=true` - Required for Supabase SSL certificates
 
 ## Technical Details
 
 - **Framework:** .NET 10.0 Windows Forms
 - **Language:** C# 12.0
-- **Database:** PostgreSQL (via Supabase)
-- **Database Driver:** Npgsql 8.0.1
+- **Database:** SQLite 3
+- **Database Driver:** Microsoft.Data.Sqlite 8.0.0
 - **UI Framework:** Windows Forms
 - **Architecture:** Event-driven with form-based navigation
 
@@ -227,67 +227,111 @@ Host=your-host.supabase.co;Database=postgres;Username=postgres;Password=your_pas
 ? **Clear Variable Names** - Self-documenting code  
 ? **Structured Methods** - Single responsibility principle  
 ? **Constants** - All pricing and configuration centralized  
-? **Comments** - Clear XML documentation  
-? **No External Dependencies** - Only Npgsql for database  
+? **Comments** - Clear documentation  
+? **Minimal Dependencies** - Only SQLite for database  
 
 ## Academic Suitability
 
 This project is designed for CET131 assessment and demonstrates:
 - Windows Forms application development
-- Database integration with cloud services
+- Local database integration
 - User input validation
 - Error handling and user feedback
 - Form-based navigation
 - Event-driven programming
 - Secure database operations
 - Professional UI design
+- Self-contained application
+
+## Advantages of SQLite for Assessment
+
+? **Zero Setup** - Works immediately, no configuration  
+? **Portable** - Single database file, easy to include in submission  
+? **Offline** - No internet connection required  
+? **Transparent** - Assessors can easily view data  
+? **Professional** - Used by Android, iOS, browsers, and more  
+? **Fast** - Excellent performance for this use case  
+? **Reliable** - Battle-tested industry standard  
 
 ## Testing Checklist
 
 - [ ] Welcome screen displays correctly
 - [ ] Login with correct credentials succeeds
 - [ ] Login with incorrect credentials fails
+- [ ] Database file is created automatically
 - [ ] Age < 18 prevents booking
 - [ ] No driving licence prevents booking
 - [ ] Empty fields show validation errors
 - [ ] Total cost calculates correctly
-- [ ] Database connection works
 - [ ] Booking saves to database
 - [ ] Confirmation dialog shows correct details
 - [ ] Form resets after successful booking
+- [ ] Data persists between application runs
 
 ## Troubleshooting
 
-### Database Connection Issues
+### Database Issues
 
-**Problem:** "Failed to connect to database"  
+**Problem:** "Database is locked"  
 **Solution:** 
-- Verify Supabase connection string in `DatabaseHelper.cs`
-- Check internet connectivity
-- Verify Supabase project is active
-- Confirm database password is correct
+- Close DB Browser or any tool viewing the database
+- Restart the application
 
-**Problem:** "SSL connection failed"  
+**Problem:** "Cannot find database file"  
 **Solution:**
-- Ensure `SSL Mode=Require` is in connection string
-- Add `Trust Server Certificate=true`
-- Check firewall settings
-
-### Application Issues
+- Check in `bin/Debug/net10.0-windows/` directory
+- Database is created on first run
 
 **Problem:** "Table does not exist"  
 **Solution:**
-- Application should create table automatically
-- Manually run CREATE TABLE query in Supabase SQL Editor
-- Check database permissions
+- Delete the `.db` file
+- Restart application (will recreate automatically)
 
-## Support
+### Application Issues
 
-For issues or questions about this CET131 assessment project:
-1. Review this README thoroughly
-2. Check database connection string configuration
-3. Verify Supabase account is active
-4. Test database connectivity using Supabase dashboard
+**Problem:** Application won't start  
+**Solution:**
+```bash
+# Check .NET version
+dotnet --version
+
+# Restore packages
+dotnet restore
+
+# Rebuild
+dotnet clean
+dotnet build
+```
+
+## Backup and Reset
+
+### Backup Your Data
+```bash
+copy bin\Debug\net10.0-windows\WeAreCarsRental.db WeAreCarsRental_backup.db
+```
+
+### Reset Database
+```bash
+del bin\Debug\net10.0-windows\WeAreCarsRental.db
+```
+Database will be recreated on next run.
+
+## Sample Data Queries
+
+```sql
+-- Recent bookings
+SELECT * FROM bookings 
+ORDER BY created_at DESC 
+LIMIT 10;
+
+-- Bookings by car type
+SELECT car_type, COUNT(*) as count, SUM(total_cost) as revenue
+FROM bookings 
+GROUP BY car_type;
+
+-- Average rental cost
+SELECT AVG(total_cost) as average_cost FROM bookings;
+```
 
 ## License
 
@@ -296,3 +340,11 @@ Created for CET131 Assessment 2 - Academic Use Only
 ## Author
 
 CET131 Student Submission
+
+---
+
+**Perfect for Academic Submission!** ?
+- Self-contained
+- No external dependencies
+- Database included
+- Easy for assessors to run and test

@@ -1,37 +1,61 @@
-using Npgsql;
+using Microsoft.Data.Sqlite;
 using System;
+using System.IO;
 
 namespace WeAreCarsRentalSystemWinForms
 {
     public class DatabaseHelper
     {
-        // TODO: Replace with your actual Supabase connection string
-        // Format: Host=db.xxxxx.supabase.co;Database=postgres;Username=postgres;Password=your_password;SSL Mode=Require;Trust Server Certificate=true
-        private const string ConnectionString = "Host=db.ybhwrcyngnfxgobhrgvh.supabase.co;Port=5432;Database=postgres;Username=postgres;Password=Un1f13dNepal@;SSL Mode=Require;Trust Server Certificate=true";
+        // SQLite database file will be created in the application directory
+        private static readonly string DatabasePath = Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, 
+            "WeAreCarsRental.db"
+        );
+
+        private static string ConnectionString => $"Data Source={DatabasePath}";
 
         public static void CreateTableIfNotExists()
         {
             string createTableQuery = @"
                 CREATE TABLE IF NOT EXISTS bookings (
-                    id SERIAL PRIMARY KEY,
-                    first_name VARCHAR(100) NOT NULL,
-                    surname VARCHAR(100) NOT NULL,
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    first_name TEXT NOT NULL,
+                    surname TEXT NOT NULL,
                     address TEXT NOT NULL,
-                    age INTEGER NOT NULL,
-                    rental_days INTEGER NOT NULL,
-                    car_type VARCHAR(50) NOT NULL,
-                    fuel_type VARCHAR(50) NOT NULL,
+                    age INTEGER NOT NULL CHECK (age >= 18),
+                    rental_days INTEGER NOT NULL CHECK (rental_days >= 1 AND rental_days <= 28),
+                    car_type TEXT NOT NULL,
+                    fuel_type TEXT NOT NULL,
                     extras TEXT,
-                    total_cost DECIMAL(10, 2) NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    total_cost REAL NOT NULL CHECK (total_cost >= 0),
+                    created_at TEXT DEFAULT (datetime('now'))
                 );";
+
+            string createIndexQuery1 = @"
+                CREATE INDEX IF NOT EXISTS idx_bookings_created_at 
+                ON bookings(created_at DESC);";
+
+            string createIndexQuery2 = @"
+                CREATE INDEX IF NOT EXISTS idx_bookings_customer 
+                ON bookings(surname, first_name);";
 
             try
             {
-                using (var connection = new NpgsqlConnection(ConnectionString))
+                using (var connection = new SqliteConnection(ConnectionString))
                 {
                     connection.Open();
-                    using (var command = new NpgsqlCommand(createTableQuery, connection))
+                    
+                    using (var command = new SqliteCommand(createTableQuery, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    using (var command = new SqliteCommand(createIndexQuery1, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+
+                    using (var command = new SqliteCommand(createIndexQuery2, connection))
                     {
                         command.ExecuteNonQuery();
                     }
@@ -47,7 +71,7 @@ namespace WeAreCarsRentalSystemWinForms
         {
             try
             {
-                using (var connection = new NpgsqlConnection(ConnectionString))
+                using (var connection = new SqliteConnection(ConnectionString))
                 {
                     connection.Open();
                     return true;
@@ -69,10 +93,10 @@ namespace WeAreCarsRentalSystemWinForms
 
             try
             {
-                using (var connection = new NpgsqlConnection(ConnectionString))
+                using (var connection = new SqliteConnection(ConnectionString))
                 {
                     connection.Open();
-                    using (var command = new NpgsqlCommand(insertQuery, connection))
+                    using (var command = new SqliteCommand(insertQuery, connection))
                     {
                         command.Parameters.AddWithValue("@firstName", firstName);
                         command.Parameters.AddWithValue("@surname", surname);
@@ -82,7 +106,7 @@ namespace WeAreCarsRentalSystemWinForms
                         command.Parameters.AddWithValue("@carType", carType);
                         command.Parameters.AddWithValue("@fuelType", fuelType);
                         command.Parameters.AddWithValue("@extras", extras ?? "None");
-                        command.Parameters.AddWithValue("@totalCost", totalCost);
+                        command.Parameters.AddWithValue("@totalCost", (double)totalCost);
 
                         command.ExecuteNonQuery();
                     }
@@ -92,6 +116,11 @@ namespace WeAreCarsRentalSystemWinForms
             {
                 throw new Exception($"Failed to insert booking: {ex.Message}");
             }
+        }
+
+        public static string GetDatabasePath()
+        {
+            return DatabasePath;
         }
     }
 }

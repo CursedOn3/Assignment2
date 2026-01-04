@@ -1,109 +1,251 @@
-# Database Configuration Guide
+# Database Configuration Guide - SQLite
 
-## Supabase Connection String Setup
+## SQLite Local Database
 
-### Step 1: Get Your Supabase Credentials
+This application now uses **SQLite** - a lightweight, file-based database that requires **NO SETUP**!
 
-1. Login to [Supabase](https://supabase.com)
-2. Open your project
-3. Go to **Settings** ? **Database**
-4. Scroll down to **Connection String** section
-5. Look for **Connection pooling** or **Direct connection**
+---
 
-### Step 2: Extract Connection Details
+## ? No Configuration Required!
 
-You'll need:
-- **Host:** `db.xxxxxxxxxxxxx.supabase.co`
-- **Database:** `postgres`
-- **User:** `postgres`
-- **Password:** `[YOUR_PASSWORD]`
-- **Port:** `5432`
+Unlike cloud databases, SQLite works out of the box:
 
-### Step 3: Update DatabaseHelper.cs
+? **No account creation needed**  
+? **No internet connection required**  
+? **No connection string to configure**  
+? **No external services**  
+? **Completely portable**  
 
-Open `DatabaseHelper.cs` and find this line:
+---
 
-```csharp
-private const string ConnectionString = "Host=your-supabase-host.supabase.co;Database=postgres;Username=postgres;Password=your_password;SSL Mode=Require;Trust Server Certificate=true";
+## ?? Database Location
+
+The SQLite database file is automatically created in your application directory:
+
+**File Name:** `WeAreCarsRental.db`
+
+**Full Path:** 
+```
+WeAreCarsRentalSystemWinForms/bin/Debug/net10.0-windows/WeAreCarsRental.db
 ```
 
-Replace it with your actual details:
-
-```csharp
-private const string ConnectionString = "Host=db.xxxxxxxxxxxxx.supabase.co;Database=postgres;Username=postgres;Password=your_actual_password;SSL Mode=Require;Trust Server Certificate=true";
+Or if you run from Release:
+```
+WeAreCarsRentalSystemWinForms/bin/Release/net10.0-windows/WeAreCarsRental.db
 ```
 
-### Example Connection Strings
+---
 
-**Format 1: Basic Connection**
-```
-Host=db.abcdefghijklm.supabase.co;Database=postgres;Username=postgres;Password=MySecurePass123;SSL Mode=Require;Trust Server Certificate=true
-```
+## ?? How It Works
 
-**Format 2: With Port (if needed)**
-```
-Host=db.abcdefghijklm.supabase.co;Port=5432;Database=postgres;Username=postgres;Password=MySecurePass123;SSL Mode=Require;Trust Server Certificate=true
-```
+### First Run
+1. Application starts
+2. Checks if `WeAreCarsRental.db` exists
+3. If not, creates it automatically
+4. Creates the `bookings` table
+5. Creates indexes for performance
+6. Ready to use!
 
-**Format 3: With Pooling (for connection pooler)**
-```
-Host=db.abcdefghijklm.supabase.co;Port=6543;Database=postgres;Username=postgres.pooler;Password=MySecurePass123;SSL Mode=Require;Trust Server Certificate=true
-```
+### Subsequent Runs
+1. Application finds existing database
+2. Uses existing data
+3. All previous bookings are preserved
 
-### Important Notes
+---
 
-?? **Security Warning:**
-- Never commit your password to version control
-- Keep your connection string private
-- Use environment variables in production
+## ?? Viewing Your Data
 
-? **SSL Configuration:**
-- `SSL Mode=Require` - MUST be included for Supabase
-- `Trust Server Certificate=true` - Required for Supabase certificates
+### Option 1: DB Browser for SQLite (Recommended)
+1. Download from https://sqlitebrowser.org/
+2. Install the application
+3. Open the `WeAreCarsRental.db` file
+4. Browse the `bookings` table
+5. View all saved bookings
 
-### Testing Your Connection
+### Option 2: Visual Studio Code
+1. Install "SQLite Viewer" extension
+2. Right-click on `WeAreCarsRental.db`
+3. Select "Open Database"
 
-Run the application. If configured correctly:
-- No error message appears on startup
-- You can create bookings successfully
-- Data appears in your Supabase dashboard
+### Option 3: Command Line
+```bash
+# Navigate to the database location
+cd WeAreCarsRentalSystemWinForms/bin/Debug/net10.0-windows
 
-If you see errors:
-1. Double-check your password
-2. Verify your host address
-3. Ensure SSL Mode=Require is included
-4. Check your internet connection
-5. Verify Supabase project is not paused
+# Open SQLite
+sqlite3 WeAreCarsRental.db
 
-### Alternative: Using Supabase Direct Connection URL
+# View all bookings
+SELECT * FROM bookings;
 
-Supabase provides a direct connection URL. To convert it:
-
-**Given URL:**
-```
-postgresql://postgres:[YOUR-PASSWORD]@db.xxxxxxxxxxxxx.supabase.co:5432/postgres
+# Exit
+.exit
 ```
 
-**Convert to:**
-```
-Host=db.xxxxxxxxxxxxx.supabase.co;Database=postgres;Username=postgres;Password=[YOUR-PASSWORD];SSL Mode=Require;Trust Server Certificate=true
-```
+---
 
-### Troubleshooting
+## ?? Database Schema
 
-| Error | Solution |
-|-------|----------|
-| "Password authentication failed" | Check password is correct |
-| "SSL connection error" | Add `SSL Mode=Require;Trust Server Certificate=true` |
-| "Host not found" | Verify host address from Supabase dashboard |
-| "Timeout" | Check internet connection and firewall |
-| "Database does not exist" | Use `postgres` as database name |
-
-### Default Credentials (DO NOT USE IN PRODUCTION)
-
-For testing ONLY, the application includes a placeholder:
-```
-Host=your-supabase-host.supabase.co;Database=postgres;Username=postgres;Password=your_password;SSL Mode=Require;Trust Server Certificate=true
+```sql
+CREATE TABLE bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT NOT NULL,
+    surname TEXT NOT NULL,
+    address TEXT NOT NULL,
+    age INTEGER NOT NULL,
+    rental_days INTEGER NOT NULL,
+    car_type TEXT NOT NULL,
+    fuel_type TEXT NOT NULL,
+    extras TEXT,
+    total_cost REAL NOT NULL,
+    created_at TEXT DEFAULT (datetime('now'))
+);
 ```
 
-You MUST replace this with your actual Supabase credentials.
+---
+
+## ? Advantages of SQLite
+
+### For Students/Learning:
+? **Zero setup** - works immediately  
+? **No accounts** - no sign-up required  
+? **Offline** - works without internet  
+? **Portable** - single file database  
+? **Fast** - excellent for small to medium apps  
+? **Reliable** - industry-standard database  
+
+### For Assessment:
+? **Easy for assessors** - no configuration needed  
+? **Self-contained** - database included with submission  
+? **Transparent** - data can be easily viewed  
+? **Professional** - used by major companies  
+
+---
+
+## ?? File Management
+
+### Backup Your Data
+Simply copy the `WeAreCarsRental.db` file to another location:
+```bash
+copy WeAreCarsRental.db WeAreCarsRental_backup.db
+```
+
+### Reset Database
+Delete the database file and it will be recreated on next run:
+```bash
+del WeAreCarsRental.db
+```
+
+### Move Database
+You can move the `.db` file to another location. The application creates it in the application directory.
+
+---
+
+## ?? Troubleshooting
+
+### Issue: "Database is locked"
+**Cause:** Another program has the database open  
+**Solution:** Close DB Browser or any other tool viewing the database
+
+### Issue: "No such table: bookings"
+**Cause:** Database file was deleted or corrupted  
+**Solution:** Delete the `.db` file and restart the application
+
+### Issue: "Cannot find database file"
+**Cause:** Looking in wrong directory  
+**Solution:** Check in `bin/Debug/net10.0-windows/` or `bin/Release/net10.0-windows/`
+
+---
+
+## ?? Why SQLite for CET131?
+
+SQLite is perfect for academic projects because:
+
+1. **No External Dependencies** - Everything self-contained
+2. **Easy to Demonstrate** - Assessor can run immediately
+3. **Portable Submission** - Database included in project
+4. **Professional** - Used by:
+   - Android applications
+   - iOS applications
+   - Browsers (Firefox, Chrome)
+   - Embedded systems
+   - Desktop applications
+
+5. **Appropriate Complexity** - Database concepts without cloud complexity
+
+---
+
+## ?? Sample Queries
+
+### View all bookings
+```sql
+SELECT * FROM bookings ORDER BY created_at DESC;
+```
+
+### Count total bookings
+```sql
+SELECT COUNT(*) as total_bookings FROM bookings;
+```
+
+### Total revenue
+```sql
+SELECT SUM(total_cost) as total_revenue FROM bookings;
+```
+
+### Bookings by car type
+```sql
+SELECT car_type, COUNT(*) as count 
+FROM bookings 
+GROUP BY car_type 
+ORDER BY count DESC;
+```
+
+### Recent bookings (last 7 days)
+```sql
+SELECT * FROM bookings 
+WHERE created_at >= datetime('now', '-7 days')
+ORDER BY created_at DESC;
+```
+
+---
+
+## ?? Benefits Over Cloud Databases
+
+| Feature | SQLite | Supabase/Cloud |
+|---------|--------|----------------|
+| Setup Time | ? 0 seconds | ?? 5+ minutes |
+| Internet Required | ? No | ? Yes |
+| Account Needed | ? No | ? Yes |
+| Configuration | ? None | ? Connection string |
+| Cost | ?? Free | ?? Free tier limited |
+| Portability | ? Single file | ? Cloud only |
+| Assessment Friendly | ? Very | ?? Requires setup |
+
+---
+
+## ?? Learning Resources
+
+- **SQLite Official:** https://www.sqlite.org/
+- **DB Browser:** https://sqlitebrowser.org/
+- **SQLite Tutorial:** https://www.sqlitetutorial.net/
+- **Microsoft Docs:** https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/
+
+---
+
+## ? Summary
+
+**You don't need to do anything!**
+
+Just run the application and SQLite handles everything:
+```bash
+cd WeAreCarsRentalSystemWinForms
+dotnet run
+```
+
+The database is created automatically, and your bookings are saved locally in a single file.
+
+Perfect for academic projects! ??
+
+---
+
+Last Updated: January 2025
