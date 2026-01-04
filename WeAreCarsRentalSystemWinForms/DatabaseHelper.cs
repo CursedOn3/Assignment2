@@ -7,7 +7,6 @@ namespace WeAreCarsRentalSystemWinForms
 {
     public class DatabaseHelper
     {
-        // SQLite database file will be created in the application directory
         private static readonly string DatabasePath = Path.Combine(
             AppDomain.CurrentDomain.BaseDirectory, 
             "WeAreCarsRental.db"

@@ -77,7 +77,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.lblTotalRevenue.Name = "lblTotalRevenue";
             this.lblTotalRevenue.Size = new System.Drawing.Size(162, 25);
             this.lblTotalRevenue.TabIndex = 3;
-            this.lblTotalRevenue.Text = "Total Revenue: £0";
+            this.lblTotalRevenue.Text = "Total Revenue: ï¿½0";
             // 
             // btnRefresh
             // 
@@ -89,7 +89,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(150, 45);
             this.btnRefresh.TabIndex = 4;
-            this.btnRefresh.Text = "?? Refresh";
+            this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
@@ -103,7 +103,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(150, 45);
             this.btnClose.TabIndex = 5;
-            this.btnClose.Text = "? Close";
+            this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 

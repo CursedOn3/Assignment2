@@ -75,7 +75,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnNewBooking.Name = "btnNewBooking";
             this.btnNewBooking.Size = new System.Drawing.Size(300, 70);
             this.btnNewBooking.TabIndex = 2;
-            this.btnNewBooking.Text = "?? New Booking";
+            this.btnNewBooking.Text = "New Booking";
             this.btnNewBooking.UseVisualStyleBackColor = false;
             this.btnNewBooking.Click += new System.EventHandler(this.btnNewBooking_Click);
             // 
@@ -89,7 +89,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnViewBookings.Name = "btnViewBookings";
             this.btnViewBookings.Size = new System.Drawing.Size(300, 70);
             this.btnViewBookings.TabIndex = 3;
-            this.btnViewBookings.Text = "?? View Bookings";
+            this.btnViewBookings.Text = "View Bookings";
             this.btnViewBookings.UseVisualStyleBackColor = false;
             this.btnViewBookings.Click += new System.EventHandler(this.btnViewBookings_Click);
             // 

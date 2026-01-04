@@ -28,7 +28,7 @@ namespace WeAreCarsRentalSystemWinForms
             }
             else
             {
-                lblError.Text = "? Invalid username or password. Access denied.";
+                lblError.Text = "Invalid username or password. Access denied.";
                 lblError.Visible = true;
                 txtPassword.Clear();
                 txtPassword.Focus();
