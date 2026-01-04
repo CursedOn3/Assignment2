@@ -30,9 +30,9 @@ namespace WeAreCarsRentalSystemWinForms
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.SuspendLayout();
-            // 
+            
             // pictureBoxBackground
-            // 
+            
             this.pictureBoxBackground.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxBackground.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxBackground.Name = "pictureBoxBackground";
@@ -40,9 +40,9 @@ namespace WeAreCarsRentalSystemWinForms
             this.pictureBoxBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxBackground.TabIndex = 1;
             this.pictureBoxBackground.TabStop = false;
-            // 
+            
             // panelMain
-            // 
+            
             this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelMain.Controls.Add(this.lblTitle);
@@ -53,9 +53,9 @@ namespace WeAreCarsRentalSystemWinForms
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(540, 390);
             this.panelMain.TabIndex = 0;
-            // 
+            
             // lblTitle
-            // 
+            
              
             this.lblInstructions.AutoSize = false;
             this.lblInstructions.BackColor = System.Drawing.Color.Transparent;
@@ -66,9 +66,9 @@ namespace WeAreCarsRentalSystemWinForms
             this.lblInstructions.TabIndex = 2;
             this.lblInstructions.Text = "Welcome to WeAreCars Rental System!";
             this.lblInstructions.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            // 
+            
             // btnProceed
-            // 
+            
             this.btnProceed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
             this.btnProceed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProceed.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
@@ -80,9 +80,9 @@ namespace WeAreCarsRentalSystemWinForms
             this.btnProceed.Text = "Proceed to Login";
             this.btnProceed.UseVisualStyleBackColor = false;
             this.btnProceed.Click += new System.EventHandler(this.btnProceed_Click);
-            // 
+            
             // WelcomeForm
-            // 
+            
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));

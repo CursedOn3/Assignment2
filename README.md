@@ -39,9 +39,17 @@ dotnet run
 
 ---
 
-## ??? Project 2: Windows Forms Application with Database
+## ??? Project 2: Windows Forms Application with SQLite Database
 
 **Location:** `WeAreCarsRentalSystemWinForms/`
+
+### ? Key Feature: **ZERO SETUP REQUIRED!**
+
+This version uses **SQLite** - a local, file-based database:
+- ? No account creation
+- ? No internet connection
+- ? No configuration
+- ? **Just run and it works!**
 
 ### Features
 ? Professional Windows Forms GUI  
@@ -49,50 +57,46 @@ dotnet run
 ? Staff login form  
 ? Main booking form with grouped sections  
 ? Real-time cost calculation  
-? **Supabase PostgreSQL database integration**  
-? SSL/TLS encrypted database connection  
+? **SQLite local database** (auto-created)  
 ? Parameterized SQL queries  
 ? Comprehensive input validation  
 ? Error handling with user feedback  
 ? Booking confirmation dialogs  
-? Data persistence  
+? Data persistence (local file)  
+? **No external services required**  
 
 ### Technology Stack
 - C# Windows Forms
 - .NET 10.0
-- Npgsql 8.0.1 (PostgreSQL driver)
-- Supabase (Cloud PostgreSQL)
-- SSL/TLS encryption
+- Microsoft.Data.Sqlite 8.0.0
+- SQLite 3 (local database)
+- Single-file database
 
 ### Database Schema
 ```sql
-bookings (
-    id SERIAL PRIMARY KEY,
-    first_name VARCHAR(100),
-    surname VARCHAR(100),
-    address TEXT,
-    age INTEGER,
-    rental_days INTEGER,
-    car_type VARCHAR(50),
-    fuel_type VARCHAR(50),
+CREATE TABLE bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT NOT NULL,
+    surname TEXT NOT NULL,
+    address TEXT NOT NULL,
+    age INTEGER NOT NULL CHECK (age >= 18),
+    rental_days INTEGER NOT NULL CHECK (rental_days >= 1 AND rental_days <= 28),
+    car_type TEXT NOT NULL,
+    fuel_type TEXT NOT NULL,
     extras TEXT,
-    total_cost DECIMAL(10,2),
-    created_at TIMESTAMP
-)
+    total_cost REAL NOT NULL CHECK (total_cost >= 0),
+    created_at TEXT DEFAULT (datetime('now'))
+);
 ```
 
-### Setup Required
+### How to Run (NO SETUP!)
 
-1. **Configure Database Connection**
-   - Open `WeAreCarsRentalSystemWinForms/DatabaseHelper.cs`
-   - Update connection string with your Supabase credentials
-   - See `WeAreCarsRentalSystemWinForms/DATABASE_CONFIG.md` for detailed instructions
+```bash
+cd WeAreCarsRentalSystemWinForms
+dotnet run
+```
 
-2. **Run the Application**
-   ```bash
-   cd WeAreCarsRentalSystemWinForms
-   dotnet run
-   ```
+**That's it!** Database is created automatically on first run.
 
 ### Credentials
 - Username: `sta001`
@@ -116,9 +120,11 @@ bookings (
 | Optional Extras | ? Yes/No | ? CheckBoxes |
 | Cost Display | ? Summary | ? Real-time |
 | Confirmation | ? Yes/No | ? Dialog Box |
-| Database | ? No | ? PostgreSQL |
-| Data Persistence | ? No | ? Yes |
+| Database | ? No | ? SQLite (local) |
+| Data Persistence | ? No | ? Yes (local file) |
 | Error Messages | ? Console | ? MessageBox |
+| Setup Required | ? None | ? **None!** |
+| Internet Required | ? No | ? **No!** |
 
 ---
 
@@ -162,17 +168,19 @@ Assignment/
 ?
 ??? WeAreCarsRentalSystemWinForms/      # Windows Forms Application
 ?   ??? Program.cs                      # Application entry point
-?   ??? DatabaseHelper.cs               # Database operations
+?   ??? DatabaseHelper.cs               # SQLite database operations
 ?   ??? WelcomeForm.cs                  # Splash screen
 ?   ??? WelcomeForm.Designer.cs         # Splash screen UI
 ?   ??? LoginForm.cs                    # Login logic
 ?   ??? LoginForm.Designer.cs           # Login UI
 ?   ??? BookingForm.cs                  # Booking logic
 ?   ??? BookingForm.Designer.cs         # Booking UI
-?   ??? database_setup.sql              # SQL setup script
-?   ??? DATABASE_CONFIG.md              # Database configuration guide
+?   ??? database_setup.sql              # SQLite schema (reference)
+?   ??? DATABASE_CONFIG.md              # Database info (no config needed!)
 ?   ??? README.md                       # WinForms app documentation
 ?   ??? WeAreCarsRentalSystemWinForms.csproj
+?   ??? bin/Debug/net10.0-windows/
+?       ??? WeAreCarsRental.db         # SQLite database (auto-created)
 ?
 ??? LICENSE
 ??? README.md                           # This file
@@ -191,19 +199,17 @@ dotnet run
 
 ### For Windows Forms Application
 
-1. **Setup Database (First Time Only)**
-   - Create Supabase account at https://supabase.com
-   - Create new project
-   - Get database connection details
-   - Update `DatabaseHelper.cs` with your credentials
-   - See `DATABASE_CONFIG.md` for step-by-step guide
+**NO SETUP REQUIRED!**
 
-2. **Run Application**
-   ```bash
-   cd WeAreCarsRentalSystemWinForms
-   dotnet run
-   ```
-   **Login:** sta001 / givemethekeys123
+```bash
+cd WeAreCarsRentalSystemWinForms
+dotnet run
+```
+
+- Database created automatically on first run
+- All data saved to local `WeAreCarsRental.db` file
+- Works offline - no internet needed
+- **Login:** sta001 / givemethekeys123
 
 ---
 
@@ -220,11 +226,13 @@ Both implementations are suitable for CET131 Assessment 2:
 
 ### Windows Forms Application
 - ? Demonstrates GUI development
-- ? Shows database integration
-- ? Implements cloud connectivity
+- ? Shows database integration (SQLite)
+- ? **Zero configuration** - perfect for assessors
 - ? Uses secure database practices
 - ? Professional error handling
 - ? Real-world application structure
+- ? **Self-contained** - database included
+- ? **Portable** - single file database
 
 ---
 
@@ -234,19 +242,20 @@ Each project includes comprehensive documentation:
 
 - **Console App:** `WeAreCarsRentalSystem/README.md`
 - **Windows Forms:** `WeAreCarsRentalSystemWinForms/README.md`
-- **Database Setup:** `WeAreCarsRentalSystemWinForms/DATABASE_CONFIG.md`
-- **SQL Scripts:** `WeAreCarsRentalSystemWinForms/database_setup.sql`
+- **Database Info:** `WeAreCarsRentalSystemWinForms/DATABASE_CONFIG.md`
+- **Quick Start:** `WeAreCarsRentalSystemWinForms/QUICK_START.md`
+- **SQL Schema:** `WeAreCarsRentalSystemWinForms/database_setup.sql`
 
 ---
 
 ## ?? Security Features (Windows Forms)
 
 - ? Parameterized SQL queries (prevents SQL injection)
-- ? SSL/TLS encrypted database connection
 - ? Password input masking
 - ? Input validation and sanitization
 - ? Database constraint checks
 - ? Error handling without exposing sensitive data
+- ? Local data storage (no cloud security concerns)
 
 ---
 
@@ -268,11 +277,12 @@ Each project includes comprehensive documentation:
 3. ? All customer fields validate
 4. ? Age/licence validation
 5. ? Real-time cost updates
-6. ? Database connection works
+6. ? **Database auto-creates**
 7. ? Data saves correctly
 8. ? Error messages display
 9. ? Form resets after booking
 10. ? Confirmation dialog shows
+11. ? **Data persists between runs**
 
 ---
 
@@ -288,12 +298,12 @@ Each project includes comprehensive documentation:
 ### Windows Forms Application
 - Windows Forms development
 - Event-driven programming
-- Database connectivity
-- Cloud service integration
+- **Local database connectivity (SQLite)**
 - Error handling strategies
 - User interface design
 - Data persistence
 - Security best practices
+- **Self-contained application design**
 
 ---
 
@@ -305,8 +315,25 @@ Each project includes comprehensive documentation:
 - Visual Studio 2022 or VS Code (recommended)
 
 ### Additional for Windows Forms
-- Internet connection (for Supabase)
-- Supabase account (free tier available)
+- ? **NO additional requirements!**
+- ? No internet connection needed
+- ? No account creation
+- ? No database server setup
+- ? **Just run!**
+
+---
+
+## ?? Viewing Database Data
+
+### Option 1: DB Browser for SQLite (Recommended)
+1. Download from https://sqlitebrowser.org/
+2. Open `bin/Debug/net10.0-windows/WeAreCarsRental.db`
+3. View all bookings in the `bookings` table
+
+### Option 2: VS Code Extension
+1. Install "SQLite Viewer" extension
+2. Right-click on `WeAreCarsRental.db`
+3. Select "Open Database"
 
 ---
 
@@ -318,11 +345,25 @@ Each project includes comprehensive documentation:
 - Verify correct working directory
 
 ### Windows Forms Application
-- Verify database connection string in `DatabaseHelper.cs`
-- Check Supabase project is active
-- Ensure internet connectivity
-- Review `DATABASE_CONFIG.md` for setup
-- Check Npgsql package is installed
+- **No configuration needed!**
+- If database errors occur, delete `WeAreCarsRental.db` and restart
+- Database will recreate automatically
+- Check .NET 10.0 is installed
+
+---
+
+## ?? Why SQLite is Perfect for This Project
+
+| Advantage | Benefit |
+|-----------|---------|
+| **Zero Setup** | Runs immediately - perfect for assessors |
+| **Portable** | Single file database - easy to backup/move |
+| **Offline** | No internet required - works anywhere |
+| **Transparent** | Database file can be easily viewed |
+| **Professional** | Used by Android, iOS, browsers, etc. |
+| **Fast** | Excellent performance for this use case |
+| **Self-Contained** | Everything in one project |
+| **Academic** | Perfect complexity level for CET131 |
 
 ---
 
@@ -344,16 +385,32 @@ Assessment 2 - WeAreCars Rental System
 ### Why Two Implementations?
 
 1. **Console Application** - Demonstrates core programming fundamentals
-2. **Windows Forms Application** - Shows real-world application development
+2. **Windows Forms Application** - Shows real-world application development with database
 
-Both meet the assignment requirements, but the Windows Forms version provides:
-- Professional user interface
-- Database persistence
-- Cloud integration
-- Enterprise-level error handling
+### Windows Forms Advantages:
+- ? Professional user interface
+- ? Local database persistence
+- ? **Zero setup** - no configuration
+- ? Enterprise-level error handling
+- ? **Perfect for assessment** - assessors can run immediately
+- ? **Self-contained** - all data in one file
 
-Choose the implementation that best suits your assessment requirements!
+### Best for Academic Submission:
+**Windows Forms + SQLite** is ideal because:
+- Assessor can clone and run immediately
+- No accounts, passwords, or configuration
+- Database included with submission
+- All data visible and accessible
+- Professional yet appropriate complexity
 
 ---
 
-**Last Updated:** January 2025
+**Both implementations are ready for CET131 Assessment 2!**
+
+Choose based on your needs:
+- **Simple demonstration:** Use Console
+- **Full-featured with database:** Use Windows Forms ? **Recommended**
+
+---
+
+**Last Updated:** January 2025 (SQLite Version)
