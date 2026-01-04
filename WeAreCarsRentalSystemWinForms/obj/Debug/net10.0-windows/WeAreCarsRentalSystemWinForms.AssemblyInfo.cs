@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WeAreCarsRentalSystemWinForms")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a81c12294802f33ca69500b0e287e34ad4125192")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4c1c0a87c595a40a2bc7575853f85fdd344feb99")]
 [assembly: System.Reflection.AssemblyProductAttribute("WeAreCarsRentalSystemWinForms")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WeAreCarsRentalSystemWinForms")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -7,7 +7,7 @@ namespace WeAreCarsRentalSystemWinForms
     {
         // TODO: Replace with your actual Supabase connection string
         // Format: Host=db.xxxxx.supabase.co;Database=postgres;Username=postgres;Password=your_password;SSL Mode=Require;Trust Server Certificate=true
-        private const string ConnectionString = "Host=your-supabase-host.supabase.co;Database=postgres;Username=postgres;Password=your_password;SSL Mode=Require;Trust Server Certificate=true";
+        private const string ConnectionString = "Host=db.ybhwrcyngnfxgobhrgvh.supabase.co;Port=5432;Database=postgres;Username=postgres;Password=Un1f13dNepal@;SSL Mode=Require;Trust Server Certificate=true";
 
         public static void CreateTableIfNotExists()
         {
