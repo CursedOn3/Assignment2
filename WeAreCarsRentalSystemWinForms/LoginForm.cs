@@ -22,9 +22,9 @@ namespace WeAreCarsRentalSystemWinForms
             {
                 lblError.Visible = false;
                 this.Hide();
-                BookingForm bookingForm = new BookingForm();
-                bookingForm.FormClosed += (s, args) => this.Close();
-                bookingForm.Show();
+                MenuForm menuForm = new MenuForm();
+                menuForm.FormClosed += (s, args) => this.Close();
+                menuForm.Show();
             }
             else
             {

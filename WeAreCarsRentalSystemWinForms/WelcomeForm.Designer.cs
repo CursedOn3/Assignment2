@@ -8,6 +8,7 @@ namespace WeAreCarsRentalSystemWinForms
         private System.Windows.Forms.Label lblInstructions;
         private System.Windows.Forms.Button btnProceed;
         private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.PictureBox pictureBoxBackground;
 
         protected override void Dispose(bool disposing)
         {
@@ -25,12 +26,24 @@ namespace WeAreCarsRentalSystemWinForms
             this.lblInstructions = new System.Windows.Forms.Label();
             this.btnProceed = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
             this.panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.SuspendLayout();
+            // 
+            // pictureBoxBackground
+            // 
+            this.pictureBoxBackground.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxBackground.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxBackground.Name = "pictureBoxBackground";
+            this.pictureBoxBackground.Size = new System.Drawing.Size(600, 450);
+            this.pictureBoxBackground.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxBackground.TabIndex = 1;
+            this.pictureBoxBackground.TabStop = false;
             // 
             // panelMain
             // 
-            this.panelMain.BackColor = System.Drawing.Color.White;
+            this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelMain.Controls.Add(this.lblTitle);
             this.panelMain.Controls.Add(this.lblSubtitle);
@@ -43,37 +56,15 @@ namespace WeAreCarsRentalSystemWinForms
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = false;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(102)))), ((int)(((byte)(204)))));
-            this.lblTitle.Location = new System.Drawing.Point(20, 40);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(500, 50);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "WeAreCars Rental System";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSubtitle
-            // 
-            this.lblSubtitle.AutoSize = false;
-            this.lblSubtitle.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.lblSubtitle.ForeColor = System.Drawing.Color.Gray;
-            this.lblSubtitle.Location = new System.Drawing.Point(20, 90);
-            this.lblSubtitle.Name = "lblSubtitle";
-            this.lblSubtitle.Size = new System.Drawing.Size(500, 25);
-            this.lblSubtitle.TabIndex = 1;
-            this.lblSubtitle.Text = "CET131 Assessment 2";
-            this.lblSubtitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblInstructions
-            // 
+             
             this.lblInstructions.AutoSize = false;
+            this.lblInstructions.BackColor = System.Drawing.Color.Transparent;
             this.lblInstructions.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblInstructions.Location = new System.Drawing.Point(50, 150);
             this.lblInstructions.Name = "lblInstructions";
-            this.lblInstructions.Size = new System.Drawing.Size(440, 140);
+            this.lblInstructions.Size = new System.Drawing.Size(440, 150);
             this.lblInstructions.TabIndex = 2;
-            this.lblInstructions.Text = "Welcome to WeAreCars Rental System!\r\n\r\nInstructions:\r\n1. Staff must login with valid credentials\r\n2. Enter customer details and rental preferences\r\n3. Review and confirm the booking\r\n\r\nClick \'Proceed to Login\' to continue...";
+            this.lblInstructions.Text = "Welcome to WeAreCars Rental System!";
             this.lblInstructions.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             // 
             // btnProceed
@@ -96,6 +87,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.ClientSize = new System.Drawing.Size(600, 450);
+            this.Controls.Add(this.pictureBoxBackground);
             this.Controls.Add(this.panelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -103,6 +95,7 @@ namespace WeAreCarsRentalSystemWinForms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "WeAreCars Rental System - Welcome";
             this.panelMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).EndInit();
             this.ResumeLayout(false);
         }
     }

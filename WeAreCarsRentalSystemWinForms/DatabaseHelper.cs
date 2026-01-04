@@ -1,5 +1,6 @@
 using Microsoft.Data.Sqlite;
 using System;
+using System.Data;
 using System.IO;
 
 namespace WeAreCarsRentalSystemWinForms
@@ -116,6 +117,74 @@ namespace WeAreCarsRentalSystemWinForms
             {
                 throw new Exception($"Failed to insert booking: {ex.Message}");
             }
+        }
+
+        public static DataTable GetAllBookings()
+        {
+            string selectQuery = @"
+                SELECT 
+                    id,
+                    first_name,
+                    surname,
+                    address,
+                    age,
+                    rental_days,
+                    car_type,
+                    fuel_type,
+                    extras,
+                    total_cost,
+                    created_at
+                FROM bookings
+                ORDER BY created_at DESC;";
+
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("id", typeof(int));
+            dataTable.Columns.Add("first_name", typeof(string));
+            dataTable.Columns.Add("surname", typeof(string));
+            dataTable.Columns.Add("address", typeof(string));
+            dataTable.Columns.Add("age", typeof(int));
+            dataTable.Columns.Add("rental_days", typeof(int));
+            dataTable.Columns.Add("car_type", typeof(string));
+            dataTable.Columns.Add("fuel_type", typeof(string));
+            dataTable.Columns.Add("extras", typeof(string));
+            dataTable.Columns.Add("total_cost", typeof(double));
+            dataTable.Columns.Add("created_at", typeof(string));
+
+            try
+            {
+                using (var connection = new SqliteConnection(ConnectionString))
+                {
+                    connection.Open();
+                    using (var command = new SqliteCommand(selectQuery, connection))
+                    {
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                DataRow row = dataTable.NewRow();
+                                row["id"] = reader.GetInt32(0);
+                                row["first_name"] = reader.GetString(1);
+                                row["surname"] = reader.GetString(2);
+                                row["address"] = reader.GetString(3);
+                                row["age"] = reader.GetInt32(4);
+                                row["rental_days"] = reader.GetInt32(5);
+                                row["car_type"] = reader.GetString(6);
+                                row["fuel_type"] = reader.GetString(7);
+                                row["extras"] = reader.IsDBNull(8) ? "None" : reader.GetString(8);
+                                row["total_cost"] = reader.GetDouble(9);
+                                row["created_at"] = reader.GetString(10);
+                                dataTable.Rows.Add(row);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to retrieve bookings: {ex.Message}");
+            }
+
+            return dataTable;
         }
 
         public static string GetDatabasePath()
